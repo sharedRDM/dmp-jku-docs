@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  keycloak:
+    image: bitnami/keycloak:23
+    pull_policy: always
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ADMIN: jkuadmins
+      KEYCLOAK_ADMIN_PASSWORD: ${PASSWORD}
+      KEYCLOAK_DATABASE_HOST: keycloak-db
+      KEYCLOAK_DATABASE_NAME: keycloak
+      KEYCLOAK_DATABASE_USER: keycloak
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_PASSWORD: ${PASSWORD}
+      KEYCLOAK_EXTRA_ARGS: "--import-realm"
+      
+      ## Set the hostname for the Keycloak server
+      # KC_HOSTNAME: your.hostname.com
+      
+      # # Enable HTTPS by specifying a keystore with certificate and key
+      # KC_HTTPS_CERTIFICATE_FILE: /opt/bitnami/keycloak/certs/tls.crt
+      # KC_HTTPS_CERTIFICATE_KEY_FILE: /opt/bitnami/keycloak/certs/tls.key
+      
+    ports:
+      - "80:8080"
+      - "443:8443"
+
+    volumes:
+      - ./sample-damap-realm-export.json:/opt/bitnami/keycloak/data/import/sample-damap-realm-export.json
+      # - ./certs:/opt/bitnami/keycloak/certs
+
+  keycloak-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: keycloak
+      DB_VENDOR: postgres
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+
+volumes:
+  keycloak_db_data:
