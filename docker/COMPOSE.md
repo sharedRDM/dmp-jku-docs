@@ -2,7 +2,7 @@
 
 A full docker-compose file with mock services can be found at the [core package](https://github.com/tuwien-csd/damap-backend/blob/next/docker/docker-compose.yaml).
 
-[`application.yaml`](https://github.com/sharedRDM/damap-backend/blob/main/src/main/resources/application.yaml) contains variables which can also be set via environment variables (i.e. `DAMAP_ORIGINS=https://dmp.medunigraz.at/`).
+[`application.yaml`](https://github.com/sharedRDM/damap-backend/blob/main/src/main/resources/application.yaml) contains variables which can also be set via environment variables (i.e. `DAMAP_ORIGINS=https://dmp.jku.at/`).
 Most of the variables under the `DAMAP` section at the beginning have to be adapted at the deployment (e.g. database connection, keycloak connection).
 
 ## Docker Compose Minimal
