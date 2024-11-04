@@ -1,8 +1,7 @@
-version: '3.3'
 
 services:
   damap-be:
-    image: ghcr.io/sharedrdm/damap-backend-jku:0.1.0-beta.1
+    image: ghcr.io/sharedrdm/damap-backend-jku:${DAMAP_BE_VERSION}
     pull_policy: always
     restart: unless-stopped
     ports:
@@ -66,7 +65,7 @@ services:
      DB_VENDOR: postgres
 
   damap-fe:
-    image: ghcr.io/sharedrdm/damap-frontend-jku:0.1.0-beta.1
+    image: ghcr.io/sharedrdm/damap-frontend-jku:${DAMAP_FE_VERSION}
     pull_policy: always
     restart: unless-stopped
     ports:
