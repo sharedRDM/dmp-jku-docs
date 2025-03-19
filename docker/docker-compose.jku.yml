@@ -31,6 +31,7 @@ services:
       DAMAP_PROJECTS_URL: ${DAMAP_PROJECTS_URL}
       DAMAP_PERSONS_URL: ${DAMAP_PERSONS_URL}
       DAMAP_FITS_URL: ${DAMAP_FITS_URL}
+      DAMAP_GOTENBERG_URL: ${DAMAP_GOTENBERG_URL}
       DAMAP_MUG_API_AUTH_TOKEN: ${DAMAP_MUG_API_AUTH_TOKEN}
 
   # frontend
@@ -50,3 +51,9 @@ services:
     restart: unless-stopped
     ports:
       - "8089:8081"
+
+  # gotenberg service 
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    ports:
+      - "3000:3000"
