@@ -4,7 +4,7 @@ services:
 
   # backend
   damap-be:
-    image: docker pull ghcr.io/sharedrdm/damap-backend-jku:${DAMAP_BE_VERSION}
+    image: ghcr.io/sharedrdm/damap-instance:${DAMAP_BE_VERSION}
     pull_policy: always
     restart: unless-stopped
     depends_on:
@@ -33,6 +33,7 @@ services:
       DAMAP_FITS_URL: ${DAMAP_FITS_URL}
       DAMAP_GOTENBERG_URL: ${DAMAP_GOTENBERG_URL}
       DAMAP_MUG_API_AUTH_TOKEN: ${DAMAP_MUG_API_AUTH_TOKEN}
+      DAMAP_TITLE: "JKU Damap"
 
   # frontend
   damap-fe:
