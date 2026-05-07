@@ -1,6 +1,6 @@
 # DMP Tool JKU
 
-**Current DMP version** `0.2.0-beta`
+**Current DMP version** `4.7.0`
 
 ## DAMAP Services Overview
 
