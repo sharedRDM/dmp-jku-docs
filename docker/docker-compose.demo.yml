@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   damap-be:
-    image: ghcr.io/sharedrdm/damap-backend-jku:${DAMAP_BE_VERSION}
+    image: ghcr.io/sharedrdm/damap-instance:${DAMAP_BE_VERSION}
     pull_policy: always
     restart: unless-stopped
     ports:
@@ -22,6 +22,7 @@ services:
       DAMAP_ORIGINS: http://localhost:8000,http://localhost:8080,http://localhost:8085
       DAMAP_FITS_URL: http://fits-service:8081/fits
       DAMAP_GOTENBERG_URL: http://gotenberg:3000
+      DAMAP_TITLE: "JKU Demo instance"
   damap-db:
     image: postgres:16
     pull_policy: always
@@ -39,20 +40,16 @@ services:
       retries: 5
 
   keycloak:
-    image: bitnami/keycloak:23
-    pull_policy: always
+    image: keycloak/keycloak:26.2
+    command: start-dev --import-realm
     restart: unless-stopped
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KEYCLOAK_DATABASE_HOST: keycloak-db
-      KEYCLOAK_DATABASE_NAME: keycloak
-      KEYCLOAK_DATABASE_USER: keycloak
-      KEYCLOAK_DATABASE_PORT: 5432
-      KEYCLOAK_DATABASE_PASSWORD: keycloak
-
-      # Import realms found in /opt/bitnami/keycloak/data/import
-      KEYCLOAK_EXTRA_ARGS: "--import-realm"
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
     ports:
       - "8087:8080"
     volumes:
